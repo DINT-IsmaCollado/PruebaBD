@@ -8,19 +8,51 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <!---->
-        <TabControl TabStripPlacement="Top">
+        <TabControl TabStripPlacement="Top" x:Name="PestañaTabControl">
             <TabItem Header="General">
 
-                <ListBox x:Name="ClientesListBox" ItemsSource="{Binding}" DisplayMemberPath="nombre"></ListBox>
+                <ListBox x:Name="ClientesListBox" ItemsSource="{Binding}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock>
+                                    <Run Text="{Binding id}"></Run>
+                                    <Run Text=" - "></Run>
+                                    <Run Text="{Binding nombre}"></Run>
+                                </TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
                 
             </TabItem>
-            <TabItem Header="Añadir" />
+            <TabItem Header="Añadir" >
+                
+                <StackPanel x:Name="DatosStackPanel">
+                        <TextBlock Text="Id"></TextBlock>
+                        <TextBox x:Name="AñadirIdStackPanel"></TextBox>
+                        <TextBlock Text="Nombre" ></TextBlock>
+                        <TextBox  x:Name="AñadirNombreStackPanel"></TextBox>
+                        <TextBlock Text="Apellido"></TextBlock>
+                        <TextBox  x:Name="AñadirApellidoStackPanel"></TextBox>
+                </StackPanel>
+                
+            </TabItem>
             <TabItem Header="Eliminar" />
             <TabItem Header="Modificar" >
 
                 <StackPanel>
                     <ComboBox x:Name="ClientesComboBox" ItemsSource="{Binding}" DisplayMemberPath="id"></ComboBox>
+                    <StackPanel x:Name="DatosStackPanel">
+                        <TextBlock Text="Id"></TextBlock>
+                        <TextBox x:Name="IdTextBox" Text="{Binding id}"></TextBox>
+                        <TextBlock Text="Nombre" ></TextBlock>
+                        <TextBox  x:Name="NombreTextBox"  Text="{Binding nombre}"></TextBox>
+                        <TextBlock Text="Apellido"></TextBlock>
+                        <TextBox  x:Name="ApellidoTextBox"  Text="{Binding apellido}"></TextBox>
+                    </StackPanel>
                 </StackPanel>
+                
                 
             </TabItem>
         </TabControl>

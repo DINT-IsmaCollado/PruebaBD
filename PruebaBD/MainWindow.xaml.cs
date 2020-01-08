@@ -38,6 +38,16 @@ namespace PruebaBD
 
             ClientesComboBox.DataContext = contexto.CLIENTES.Local;
 
+            if(ClientesComboBox.SelectedItem != null)
+            {
+                CLIENTE c = (CLIENTE)ClientesComboBox.SelectedItem;
+
+                DatosStackPanel.DataContext = c;
+            }
+
+            
+
+
         }
     }
 }
