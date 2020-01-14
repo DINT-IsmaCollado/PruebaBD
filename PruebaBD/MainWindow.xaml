@@ -29,21 +29,32 @@
             <TabItem Header="Añadir" >
                 
                 <StackPanel x:Name="DatosStackPanel">
-                        <TextBlock Text="Id"></TextBlock>
-                        <TextBox x:Name="AñadirIdStackPanel"></TextBox>
-                        <TextBlock Text="Nombre" ></TextBlock>
-                        <TextBox  x:Name="AñadirNombreStackPanel"></TextBox>
-                        <TextBlock Text="Apellido"></TextBlock>
-                        <TextBox  x:Name="AñadirApellidoStackPanel"></TextBox>
+                    <TextBlock Text="Id"></TextBlock>
+                    <TextBox x:Name="AñadirIdStackPanel" Text="{Binding id}"></TextBox>
+                    <TextBlock Text="Nombre" ></TextBlock>
+                    <TextBox  x:Name="AñadirNombreStackPanel" Text="{Binding nombre}"></TextBox>
+                    <TextBlock Text="Apellido"></TextBlock>
+                    <TextBox  x:Name="AñadirApellidoStackPanel" Text="{Binding apellido}"></TextBox>
+                    <Button Content="Aceptar" Width="50" Click="Button_Click_Añadir"></Button>
+                </StackPanel>
+                
+                
+            </TabItem>
+            <TabItem Header="Eliminar" >
+                
+                <StackPanel>
+                    <ComboBox x:Name="EliminarClientesComboBox" ItemsSource="{Binding}" DisplayMemberPath="id" Width="150" HorizontalAlignment="Left"></ComboBox>
+                    <StackPanel x:Name="EliminarStackPanel">
+                        <Button Content="Eliminar" Width="50" HorizontalAlignment="Left" Margin="25,10,0,0" Click="Button_Click_Eliminar"/>
+                    </StackPanel>
                 </StackPanel>
                 
             </TabItem>
-            <TabItem Header="Eliminar" />
             <TabItem Header="Modificar" >
 
                 <StackPanel>
                     <ComboBox x:Name="ClientesComboBox" ItemsSource="{Binding}" DisplayMemberPath="id"></ComboBox>
-                    <StackPanel x:Name="DatosStackPanel">
+                    <StackPanel x:Name="SeleccionStackPanel" DataContext="{Binding ElementName=ClientesComboBox, Path=SelectedItem}">
                         <TextBlock Text="Id"></TextBlock>
                         <TextBox x:Name="IdTextBox" Text="{Binding id}"></TextBox>
                         <TextBlock Text="Nombre" ></TextBlock>
@@ -51,6 +62,7 @@
                         <TextBlock Text="Apellido"></TextBlock>
                         <TextBox  x:Name="ApellidoTextBox"  Text="{Binding apellido}"></TextBox>
                     </StackPanel>
+                    <Button Content="Modificar" Width="100" Margin="0,15,0,0" Click="Button_Click_Modificar"></Button>
                 </StackPanel>
                 
                 
