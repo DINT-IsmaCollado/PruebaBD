@@ -24,6 +24,7 @@ namespace PruebaBD
     {
         private IsmaBDEntities contexto;
         CLIENTE c;
+        CollectionViewSource vista;
 
         public MainWindow()
         {
@@ -33,6 +34,13 @@ namespace PruebaBD
 
             contexto = new IsmaBDEntities();
             contexto.CLIENTES.Load();
+            contexto.PEDIDOS.Load();
+            vista = new CollectionViewSource();
+            vista.Source = contexto.CLIENTES.Local;
+ 
+
+            CLIENTE c = new CLIENTE();
+            
 
             #region General
 
@@ -59,8 +67,39 @@ namespace PruebaBD
 
             #endregion
 
+            #region DataGrid
 
+            ClienteDataGrid.DataContext = contexto.CLIENTES.Local;
 
+            #endregion
+
+            #region Filtro
+
+            FiltroDataGrid.DataContext = vista;
+
+            vista.Filter += Vista_Filter;
+
+            #endregion
+
+            
+
+        }
+
+        private void Vista_Filter(object sender, FilterEventArgs e)
+        {
+            CLIENTE item = (CLIENTE)e.Item;
+
+            if(FiltroTextBox.Text == "")
+            {
+                e.Accepted = true;
+            }
+            else
+            {
+                if (item.nombre.Contains(FiltroTextBox.Text))
+                    e.Accepted = true;
+                else
+                    e.Accepted = false;
+            }
         }
 
         private void Button_Click_Añadir(object sender, RoutedEventArgs e)
@@ -80,6 +119,11 @@ namespace PruebaBD
         private void Button_Click_Modificar(object sender, RoutedEventArgs e)
         {
             contexto.SaveChanges();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            vista.View.Refresh();
         }
     }
 }
